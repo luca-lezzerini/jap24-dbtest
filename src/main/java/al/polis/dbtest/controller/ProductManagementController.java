@@ -1,6 +1,7 @@
 package al.polis.dbtest.controller;
 
 import al.polis.dbtest.dto.FilterDTO;
+import al.polis.dbtest.dto.IdDTO;
 import al.polis.dbtest.dto.ProductDTO;
 import al.polis.dbtest.model.Product;
 import al.polis.dbtest.service.ProductManagerService;
@@ -36,6 +37,16 @@ public class ProductManagementController {
     public List<ProductDTO> insertProduct(@RequestBody ProductDTO dto) {
         System.out.println("insertProduct " + dto);
         var list = productManagerService.saveProduct(dto);
+        List<ProductDTO> dtos = new ArrayList<>();
+        list.forEach(p -> dtos.add(new ProductDTO(p)));
+        return dtos;
+    }
+    
+    @PostMapping("/removeProduct")
+    @ResponseBody
+    public List<ProductDTO> removeProduct(@RequestBody IdDTO dto) {
+        System.out.println("removeProduct " + dto);
+        var list = productManagerService.deleteProduct(dto.getId());
         List<ProductDTO> dtos = new ArrayList<>();
         list.forEach(p -> dtos.add(new ProductDTO(p)));
         return dtos;

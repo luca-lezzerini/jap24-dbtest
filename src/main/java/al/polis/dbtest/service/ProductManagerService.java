@@ -10,5 +10,7 @@ public interface ProductManagerService {
 
     List<Product> saveProduct(ProductDTO dto);
 
+    List<Product> deleteProduct(Long id);
+
     List<Product> filterProducts(String filter);
 }

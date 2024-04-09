@@ -35,4 +35,10 @@ public class ProductManagerServiceImpl implements ProductManagerService {
         return list;
     }
 
+    @Override
+    public List<Product> deleteProduct(Long id) {
+        productRepository.deleteById(id);
+        return productRepository.findAll();
+    }
+
 }
