@@ -3,9 +3,7 @@ package al.polis.dbtest.controller;
 import al.polis.dbtest.dto.FilterDTO;
 import al.polis.dbtest.dto.IdDTO;
 import al.polis.dbtest.dto.ProductDTO;
-import al.polis.dbtest.model.Product;
 import al.polis.dbtest.service.ProductManagerService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +24,8 @@ public class ProductManagementController {
     @GetMapping("/getProductsList")
     @ResponseBody
     public List<ProductDTO> getProductsList() {
-        List<Product> list = productManagerService.getProductsList();
-        List<ProductDTO> dto = new ArrayList<>();
-        list.forEach(p -> dto.add(new ProductDTO(p)));
-        return dto;
+        List<ProductDTO> list = productManagerService.getProductsList();
+        return list;
     }
 
     @PostMapping("/insertProduct")
@@ -37,9 +33,15 @@ public class ProductManagementController {
     public List<ProductDTO> insertProduct(@RequestBody ProductDTO dto) {
         System.out.println("insertProduct " + dto);
         var list = productManagerService.saveProduct(dto);
-        List<ProductDTO> dtos = new ArrayList<>();
-        list.forEach(p -> dtos.add(new ProductDTO(p)));
-        return dtos;
+        return list;
+    }
+
+    @PostMapping("/updateProduct")
+    @ResponseBody
+    public List<ProductDTO> updateProduct(@RequestBody ProductDTO dto) {
+        System.out.println("updateProduct " + dto);
+        var list = productManagerService.updateProduct(dto);
+        return list;
     }
     
     @PostMapping("/removeProduct")
@@ -47,9 +49,7 @@ public class ProductManagementController {
     public List<ProductDTO> removeProduct(@RequestBody IdDTO dto) {
         System.out.println("removeProduct " + dto);
         var list = productManagerService.deleteProduct(dto.getId());
-        List<ProductDTO> dtos = new ArrayList<>();
-        list.forEach(p -> dtos.add(new ProductDTO(p)));
-        return dtos;
+        return list;
     }
 
     @PostMapping("/filterProducts")
@@ -61,8 +61,6 @@ public class ProductManagementController {
                 .orElse("%");
         System.out.println("Filter is " + filter);
         var list = productManagerService.filterProducts(filter);
-        List<ProductDTO> dtos = new ArrayList<>();
-        list.forEach(p -> dtos.add(new ProductDTO(p)));
-        return dtos;
+        return list;
     }
 }
