@@ -14,4 +14,6 @@ public interface ProductManagerService {
     List<ProductDTO> deleteProduct(Long id);
 
     List<ProductDTO> filterProducts(String filter);
+
+    List<ProductDTO> assocManProd(Long idMan, Long idProd);
 }

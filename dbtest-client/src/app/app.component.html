@@ -1,0 +1,33 @@
+<h1>Product</h1>
+Code <input type="text" [(ngModel)]="code" name="code"><br>
+Description <input type="text" [(ngModel)]="description" name="description"><br>
+Price <input type="number" [(ngModel)]="price" name="price"><br>
+<button (click)="addProduct()">Add Product</button>
+<button (click)="refreshProducts()">Refresh Products List</button>
+<br><input type="text" [(ngModel)]="criterion" name="criterion">
+<button (click)="searchWithCrit()">Search with criterion</button>
+<br><br>
+<table border="1">
+  <tr *ngFor="let pr of products">
+    <td>{{pr.code}}</td>
+    <td>{{pr.description}}</td>
+    <td>{{pr.price | currency}}</td>
+    <td><button (click)="removeProduct(pr)">X</button></td>
+    <td><button (click)="setSupplier(pr)">Associate</button></td>
+  </tr>
+</table>
+<hr>
+<h1>Manufacturer</h1>
+Name <input type="text" [(ngModel)]="name" name="name"><br>
+<button (click)="addMan()">Add Manufacturer</button>
+<button (click)="refreshMans()">Refresh Manufacturers List</button>
+<br>
+<p *ngIf="selectedManufacturer.manufacturerName != ''">Currently selected is {{selectedManufacturer.manufacturerName}}</p>
+<br>
+<table border="1">
+  <tr *ngFor="let m of mans">
+    <td>{{m.manufacturerName}}</td>
+    <td><button (click)="selectManufacturer(m)">Select</button></td>
+  </tr>
+</table>
+<hr>

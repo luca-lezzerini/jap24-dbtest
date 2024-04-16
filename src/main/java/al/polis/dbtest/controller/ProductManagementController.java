@@ -1,5 +1,6 @@
 package al.polis.dbtest.controller;
 
+import al.polis.dbtest.dto.AssocManProdDto;
 import al.polis.dbtest.dto.FilterDTO;
 import al.polis.dbtest.dto.IdDTO;
 import al.polis.dbtest.dto.ProductDTO;
@@ -43,7 +44,7 @@ public class ProductManagementController {
         var list = productManagerService.updateProduct(dto);
         return list;
     }
-    
+
     @PostMapping("/removeProduct")
     @ResponseBody
     public List<ProductDTO> removeProduct(@RequestBody IdDTO dto) {
@@ -61,6 +62,13 @@ public class ProductManagementController {
                 .orElse("%");
         System.out.println("Filter is " + filter);
         var list = productManagerService.filterProducts(filter);
+        return list;
+    }
+
+    @PostMapping("/assocProdMan")
+    @ResponseBody
+    public List<ProductDTO> assocProdMan(@RequestBody AssocManProdDto dto) {
+        var list = productManagerService.assocManProd(dto.getManId(), dto.getProdId());
         return list;
     }
 }
